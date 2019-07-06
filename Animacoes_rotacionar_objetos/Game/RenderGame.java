@@ -47,9 +47,11 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 	private BufferedImage player;
 	private int countGameFrame=0;
 
-	private int XcentroRotacao=90;
-	private int YcentroRotacao=90;
-	private int anguloGraus=90;
+	private int x0Player=50;
+	private int y0Player=0;
+	private int XcentroRotacao=x0Player+8;
+	private int YcentroRotacao=y0Player+8;
+	private int anguloGraus=0;
 
 	public RenderGame(int HEIGHT,int WIDTH,int SCALE,String FrameTitle){
 
@@ -66,7 +68,10 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 
 	public void updateGameFrame(){
 
+		this.anguloGraus++;
 		this.countGameFrame++;
+		this.y0Player++;
+		this.YcentroRotacao=y0Player+8;
 
 	}
 
@@ -86,12 +91,12 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 		Graphics g = this.tela.canvas.getGraphics();
 		g.setColor(Color.WHITE);
 		g.fillRect(0,0,this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE);
-		g.drawImage(player,10,10,null);
+		//g.drawImage(player,10,10,null);
 
 		/* player rotacionado */
 		Graphics2D g2 = (Graphics2D) g;
 		g2.rotate(Math.toRadians(anguloGraus),XcentroRotacao,YcentroRotacao);
-		g2.drawImage(player,10,10,null);
+		g2.drawImage(player,x0Player,y0Player,null);
 		
 	}
 
