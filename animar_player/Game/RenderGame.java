@@ -63,7 +63,7 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 		this.tela.startGameFrame();
 		this.image = new BufferedImage(this.WIDTH,this.HEIGHT,BufferedImage.TYPE_INT_RGB);
 		this.sheet = new SpriteSheet("/res/spritesheet.png");
-		this.player = sheet.getSprite(0,0,128,32);
+		this.player = sheet.getSprite(0,0,128,128);
 	}
 
 	public void updateGameFrame(){
