@@ -46,6 +46,9 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 	private SpriteSheet sheet;
 	private BufferedImage[] player = new BufferedImage[4];
 	private int countGameFrame=0;
+	private int maxFrames=5;
+	private int curAnimation=0;
+	private int maxAnimation=4;
 
 	private int x0Player=50;
 	private int y0Player=0;
@@ -63,8 +66,8 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 		this.tela.startGameFrame();
 		this.image = new BufferedImage(this.WIDTH,this.HEIGHT,BufferedImage.TYPE_INT_RGB);
 		this.sheet = new SpriteSheet("/res/spritesheet.png");
-		this.player[0] = sheet.getSprite(0,0,64,64);
-		this.player[1] = sheet.getSprite(64,0,64,64);
+		this.player[0] = sheet.getSprite(0,2,64,64);
+		this.player[1] = sheet.getSprite(64,2,64,64);
 		this.player[2] = sheet.getSprite(0,66,64,64);
 		this.player[3] = sheet.getSprite(64,66,64,64);
 	}
@@ -72,6 +75,18 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 	public void updateGameFrame(){
 
 		this.countGameFrame++;
+
+		if(this.countGameFrame > maxFrames){
+			
+			this.countGameFrame = 0;
+			this.curAnimation++;
+
+			if(this.curAnimation >= this.maxAnimation){
+				this.curAnimation = 0;
+			}
+
+
+		}
 
 	}
 
@@ -92,10 +107,10 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 		g.fillRect(0,0,this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE);
 
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(player[0],0,0,null);
-		g2.drawImage(player[1],0,0,null);
-		g2.drawImage(player[2],0,0,null);
-		g2.drawImage(player[3],0,0,null);
+		g2.drawImage(player[this.curAnimation],0,0,null);
+		//g2.drawImage(player[1],0,0,null);
+		//g2.drawImage(player[2],0,0,null);
+		//g2.drawImage(player[3],0,0,null);
 		
 	}
 
@@ -113,8 +128,8 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 		while(this.isRunning){
 
 			if(this.isRunning(System.nanoTime())){
+				renderizeGame();				
 				updateGameFrame();
-				renderizeGame();
 			}
 
 		}
