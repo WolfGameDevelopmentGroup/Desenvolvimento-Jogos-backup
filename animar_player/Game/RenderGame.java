@@ -44,11 +44,11 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 	private BufferedImage image;
 	private BufferStrategy bs;
 	private SpriteSheet sheet;
-	private BufferedImage[] player = new BufferedImage[8];
+	private BufferedImage[] player = new BufferedImage[4];
 	private int countGameFrame=0;
-	private int maxFrames=15;
+	private int maxFrames=10;
 	private int curAnimation=0;
-	private int maxAnimation=8;
+	private int maxAnimation=4;
 
 	private int xPlayer=50;
 	private int yPlayer=50;
@@ -66,11 +66,11 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 		this.player[0] = sheet.getSprite(0,0,45,64);
 		this.player[1] = sheet.getSprite(45,0,45,64);
 		this.player[2] = sheet.getSprite(90,0,45,64);
-		this.player[3] = sheet.getSprite(135,0,45,64);
-		this.player[4] = sheet.getSprite(180,0,45,64);
-		this.player[5] = sheet.getSprite(0,64,45,64);
-		this.player[6] = sheet.getSprite(45,64,45,64);
-		this.player[7] = sheet.getSprite(90,64,45,64);
+		this.player[3] = sheet.getSprite(138,0,45,64);
+		//this.player[4] = sheet.getSprite(180,0,45,64);
+		//this.player[5] = sheet.getSprite(0,64,45,64);
+		//this.player[6] = sheet.getSprite(45,64,45,64);
+		//this.player[7] = sheet.getSprite(90,64,45,64);
 	}
 
 	public void updateGameFrame(){
@@ -109,7 +109,7 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 		
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(player[this.curAnimation],this.xPlayer,this.yPlayer,null);
-		//g2.drawImage(player[1],0,0,null);
+		//g2.drawImage(player[3],0,0,null);
 		//g2.drawImage(player[2],0,0,null);
 		//g2.drawImage(player[3],0,0,null);
 		g.dispose();
