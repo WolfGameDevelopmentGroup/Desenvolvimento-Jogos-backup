@@ -46,7 +46,7 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 	private SpriteSheet sheet;
 	private BufferedImage[] player = new BufferedImage[8];
 	private int countGameFrame=0;
-	private int maxFrames=30;
+	private int maxFrames=15;
 	private int curAnimation=0;
 	private int maxAnimation=8;
 

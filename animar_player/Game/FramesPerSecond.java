@@ -35,7 +35,7 @@ public class FramesPerSecond{
 	public boolean isRunning(long timeNsNow){
 
 		this.deltaTSeconds = (timeNsNow - this.startGameTime)/this.ns;
-		this.deltaFrame = ratio*(int)Math.floor(this.deltaTSeconds);		
+		this.deltaFrame = (int)Math.floor(ratio*this.deltaTSeconds);		
 
 		if(this.deltaFrame > frameAtual){
 
