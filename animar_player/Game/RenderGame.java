@@ -44,7 +44,7 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 	private BufferedImage image;
 	private BufferStrategy bs;
 	private SpriteSheet sheet;
-	private BufferedImage player;
+	private BufferedImage[] player = new BufferedImage[4];
 	private int countGameFrame=0;
 
 	private int x0Player=50;
@@ -63,7 +63,10 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 		this.tela.startGameFrame();
 		this.image = new BufferedImage(this.WIDTH,this.HEIGHT,BufferedImage.TYPE_INT_RGB);
 		this.sheet = new SpriteSheet("/res/spritesheet.png");
-		this.player = sheet.getSprite(0,0,128,128);
+		this.player[0] = sheet.getSprite(0,0,64,64);
+		this.player[1] = sheet.getSprite(64,0,64,64);
+		this.player[2] = sheet.getSprite(0,66,64,64);
+		this.player[3] = sheet.getSprite(64,66,64,64);
 	}
 
 	public void updateGameFrame(){
@@ -89,7 +92,10 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 		g.fillRect(0,0,this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE);
 
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(player,x0Player,y0Player,null);
+		g2.drawImage(player[0],0,0,null);
+		g2.drawImage(player[1],0,0,null);
+		g2.drawImage(player[2],0,0,null);
+		g2.drawImage(player[3],0,0,null);
 		
 	}
 
