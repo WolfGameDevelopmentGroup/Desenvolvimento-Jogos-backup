@@ -44,17 +44,14 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 	private BufferedImage image;
 	private BufferStrategy bs;
 	private SpriteSheet sheet;
-	private BufferedImage[] player = new BufferedImage[4];
+	private BufferedImage[] player = new BufferedImage[8];
 	private int countGameFrame=0;
-	private int maxFrames=5;
+	private int maxFrames=30;
 	private int curAnimation=0;
-	private int maxAnimation=4;
+	private int maxAnimation=8;
 
-	private int x0Player=50;
-	private int y0Player=0;
-	private int XcentroRotacao=x0Player+8;
-	private int YcentroRotacao=y0Player+8;
-	private int anguloGraus=0;
+	private int xPlayer=50;
+	private int yPlayer=50;
 
 	public RenderGame(int HEIGHT,int WIDTH,int SCALE,String FrameTitle){
 
@@ -65,11 +62,15 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 		this.tela = new FrameGame(this.HEIGHT,this.WIDTH,this.SCALE, this.FrameTitle);
 		this.tela.startGameFrame();
 		this.image = new BufferedImage(this.WIDTH,this.HEIGHT,BufferedImage.TYPE_INT_RGB);
-		this.sheet = new SpriteSheet("/res/spritesheet.png");
-		this.player[0] = sheet.getSprite(0,2,64,64);
-		this.player[1] = sheet.getSprite(64,2,64,64);
-		this.player[2] = sheet.getSprite(0,66,64,64);
-		this.player[3] = sheet.getSprite(64,66,64,64);
+		this.sheet = new SpriteSheet("/res/novospritesheet.png");
+		this.player[0] = sheet.getSprite(0,0,45,64);
+		this.player[1] = sheet.getSprite(45,0,45,64);
+		this.player[2] = sheet.getSprite(90,0,45,64);
+		this.player[3] = sheet.getSprite(135,0,45,64);
+		this.player[4] = sheet.getSprite(180,0,45,64);
+		this.player[5] = sheet.getSprite(0,64,45,64);
+		this.player[6] = sheet.getSprite(45,64,45,64);
+		this.player[7] = sheet.getSprite(90,64,45,64);
 	}
 
 	public void updateGameFrame(){
@@ -96,21 +97,22 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 
 		if(bs == null){
 			System.out.println("bs é null");
-			this.tela.canvas.createBufferStrategy(3);
+			this.tela.canvas.createBufferStrategy(2);
 			return;
 		}
 
-		System.out.println("Renderizando");
-
+		//System.out.println("Renderizando");
+		
 		Graphics g = this.tela.canvas.getGraphics();
 		g.setColor(Color.WHITE);
 		g.fillRect(0,0,this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE);
-
+		
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(player[this.curAnimation],0,0,null);
+		g2.drawImage(player[this.curAnimation],this.xPlayer,this.yPlayer,null);
 		//g2.drawImage(player[1],0,0,null);
 		//g2.drawImage(player[2],0,0,null);
 		//g2.drawImage(player[3],0,0,null);
+		g.dispose();
 		
 	}
 
@@ -134,6 +136,6 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 
 		}
 
-	}		
+	}
 
 }
