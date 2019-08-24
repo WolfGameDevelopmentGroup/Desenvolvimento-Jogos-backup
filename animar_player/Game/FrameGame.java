@@ -56,4 +56,8 @@ public class FrameGame extends Canvas{
 
 	}
 
+	public void drawBackground(Graphics g){
+		g.fillRect(0,0,this.WIDTH*this.SCALE, this.HEIGHT*this.SCALE);
+	}
+
 }

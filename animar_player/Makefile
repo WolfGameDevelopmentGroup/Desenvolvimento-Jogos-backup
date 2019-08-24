@@ -16,7 +16,7 @@ CC = javac
 GAME = ./Game
 PAC = $(GAME)/SpriteSheet.class $(GAME)/FramesPerSecond.class $(GAME)/FrameGame.class $(GAME)/RenderGame.class
 
-all:	libed main.class
+all:	libed main.class run
 
 libed:	$(PAC)
 

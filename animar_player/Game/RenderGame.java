@@ -42,6 +42,7 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 	String FrameTitle;
 
 	private BufferedImage image;
+	private BufferedImage layer;
 	private BufferStrategy bs;
 	private SpriteSheet sheet;
 	private BufferedImage[] player = new BufferedImage[4];
@@ -62,6 +63,7 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 		this.tela = new FrameGame(this.HEIGHT,this.WIDTH,this.SCALE, this.FrameTitle);
 		this.tela.startGameFrame();
 		this.image = new BufferedImage(this.WIDTH,this.HEIGHT,BufferedImage.TYPE_INT_RGB);
+		this.layer = new BufferedImage(this.WIDTH,this.HEIGHT,BufferedImage.TYPE_INT_RGB);
 		this.sheet = new SpriteSheet("/res/novospritesheet.png");
 		this.player[0] = sheet.getSprite(0,0,45,64);
 		this.player[1] = sheet.getSprite(45,0,45,64);
@@ -93,26 +95,23 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 
 	public void renderizeGame(){
 
-		BufferStrategy bs = this.tela.canvas.getBufferStrategy();
+		this.bs = this.tela.canvas.getBufferStrategy();
 
-		if(bs == null){
-			System.out.println("bs é null");
-			this.tela.canvas.createBufferStrategy(2);
+		if(this.bs == null){
+			this.tela.canvas.createBufferStrategy(3);
 			return;
 		}
 
-		//System.out.println("Renderizando");
-		
-		Graphics g = this.tela.canvas.getGraphics();
+		Graphics g = this.layer.getGraphics();
+
 		g.setColor(Color.WHITE);
-		g.fillRect(0,0,this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE);
+		this.tela.drawBackground(g);
 		
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(player[this.curAnimation],this.xPlayer,this.yPlayer,null);
-		//g2.drawImage(player[3],0,0,null);
-		//g2.drawImage(player[2],0,0,null);
-		//g2.drawImage(player[3],0,0,null);
-		g.dispose();
+		g = bs.getDrawGraphics();
+		g.drawImage(layer, 0, 0, WIDTH*SCALE,HEIGHT*SCALE,null);
+		this.bs.show();
 		
 	}
 
