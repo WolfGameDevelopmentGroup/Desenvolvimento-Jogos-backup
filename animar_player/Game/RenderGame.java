@@ -69,10 +69,6 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 		this.player[1] = sheet.getSprite(45,0,45,64);
 		this.player[2] = sheet.getSprite(90,0,45,64);
 		this.player[3] = sheet.getSprite(138,0,45,64);
-		//this.player[4] = sheet.getSprite(180,0,45,64);
-		//this.player[5] = sheet.getSprite(0,64,45,64);
-		//this.player[6] = sheet.getSprite(45,64,45,64);
-		//this.player[7] = sheet.getSprite(90,64,45,64);
 	}
 
 	public void updateGameFrame(){
