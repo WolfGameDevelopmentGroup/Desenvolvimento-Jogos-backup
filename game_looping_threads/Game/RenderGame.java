@@ -59,23 +59,20 @@ public class RenderGame extends FramesPerSecond implements Runnable{
 
 	public void renderizeGame(){
 
-		BufferStrategy bs = this.tela.frame.getBufferStrategy();
+		this.bs = this.tela.frame.getBufferStrategy();
 
-		if(bs == null){
-			System.out.println("oi");
+		if(this.bs == null){
 			this.tela.frame.createBufferStrategy(3);
 			return;
 		}
 
-		System.out.println("Renderizando");
+		Graphics g = this.image.getGraphics();
 
-		Graphics g = image.getGraphics();
 		g.setColor( Color.BLACK);
 		this.tela.frame.paint(g);
-		/*g.fillRect(0,0,this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE);
-		g = (Graphics2D) bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, this.WIDTH*this.SCALE,this.HEIGHT*this.SCALE, null );
-		bs.show();*/
+		g = bs.getDrawGraphics();
+		g.drawImage(this.image, 0, 0, WIDTH*SCALE,HEIGHT*SCALE,null);
+		this.bs.show();
 
 	}
 
